@@ -1,8 +1,6 @@
 version: '1.0'
 stages:
   - prepare
-  - test
-  - integration
   - build
 steps:
   main_clone:
@@ -10,24 +8,12 @@ steps:
     stage: prepare
     type: git-clone
     repo: 'rainzha/cd-pipeline-sample-app'
-    revision: master
-  MyUnitTests:
-    title: Compile/Unit test
-    stage: test
-    image: 'maven:3.5.2-jdk-8-alpine'
-    commands:
-      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository package
-  Integration:
-    title: Integration test
-    stage: integration
-    image: maven:3.5.2-jdk-8-alpine
-    commands:
-      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository verify
-  MyAppDockerImage:
+    revision: multi-stage-docker
+  BuildingDockerImage:
     title: Building Docker Image
-    type: build
     stage: build
-    image_name: cd-pipeline-sample-app
+    type: build
+    image_name: spring-boot-2-sample-app
     working_directory: ./
-    tag: 'non-multi-stage'
+    tag: 'multi-stage'
     dockerfile: Dockerfile
