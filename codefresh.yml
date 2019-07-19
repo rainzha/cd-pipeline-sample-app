@@ -11,7 +11,6 @@ steps:
     type: git-clone
     repo: 'rainzha/cd-pipeline-sample-app'
     revision: master
-    git: github
   MyUnitTests:
     title: Compile/Unit test
     stage: test
