@@ -8,7 +8,7 @@ steps:
     stage: prepare
     type: git-clone
     repo: 'rainzha/cd-pipeline-sample-app'
-    revision: multi-stage-docker
+    revision: ${{CF_BRANCH}}
   BuildingDockerImage:
     title: Building Docker Image
     stage: build
